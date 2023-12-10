@@ -19,6 +19,7 @@ from a_threads import WeatherHandler
 class WindowWeather(QtWidgets.QWidget):
     lat = 36.826903
     lon = 10.173742
+
     def __init__(self, parent=None):
         super().__init__(parent)
 
@@ -117,7 +118,6 @@ class WindowWeather(QtWidgets.QWidget):
             self.stopGetData()
 
 
-
     def validateLongitude(self):
         longitude_text = self.ui_s.lineEditLongitude.text()
         try:
@@ -130,6 +130,7 @@ class WindowWeather(QtWidgets.QWidget):
         except ValueError:
             self.ui_s.lineEditLongitude.setStyleSheet("background-color: red;")
             self.ui_s.textEditData.setText('<font color="red">Введите корректные координаты</font>')
+
 
 class WeatherHandler(QtCore.QThread):
     weatherInfoReceived = QtCore.Signal(dict)
@@ -154,9 +155,6 @@ class WeatherHandler(QtCore.QThread):
             data = response.json()
             self.weatherInfoReceived.emit(data)
             time.sleep(self.__delay)
-
-
-
 
 
 if __name__ == "__main__":
